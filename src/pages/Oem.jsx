@@ -93,26 +93,31 @@ const Oem = () => {
     }
   }
 
+
+
   return (
     <>
       <div>
-        <div style={{ display: 'flex' }}>
+
+        <div> 
           <div>
-            <select onChange={(e) => sortByMileage(e.target.value)}>
+          <div style={{ display: 'flex' , marginTop:"20px",marginBottom:"30px" }}>
+          <div >
+            <select style={{border:"1px solid black", marginLeft:"60px",width:"200px",height:"40px"}} onChange={(e) => sortByMileage(e.target.value)}>
               <option value="">Sort by Mileage</option>
               <option value="asc">Low to High</option>
               <option value="desc">High to Low</option>
             </select>
           </div>
           <div>
-            <select onChange={(e) => sortByPrice(e.target.value)}>
+            <select style={{border:"1px solid black", marginLeft:"60px",width:"200px",height:"40px"}} onChange={(e) => sortByPrice(e.target.value)}>
               <option value="">Sort By Price</option>
               <option value="asc">Low to High</option>
               <option value="desc">High to Low</option>
             </select>
           </div>
-          <div>
-            <select onChange={(e) => FilterByColor(e.target.value)}>
+          <div >
+            <select style={{border:"1px solid black", marginLeft:"60px",width:"200px",height:"40px"}} onChange={(e) => FilterByColor(e.target.value)}>
               <option value="">Filter by color</option>
               <option value="black">Black</option>
               <option value="white">White</option>
@@ -120,7 +125,15 @@ const Oem = () => {
               <option value="red">Red</option>
             </select>
           </div>
+
+
+
+          <input style={{border:"1px solid black",marginLeft:"20px",width:"700px",height:"40px"}} placeholder="search by model name"/>
         </div>
+          </div>
+        
+        </div>
+       
 
         <div
           style={{
@@ -128,9 +141,11 @@ const Oem = () => {
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "20px",
             width: "100%",
+            padding:"20px"
           }}
         >
-          {oem === null ? ( // Render a loading indicator while oem is null
+
+          {oem === null ? ( 
             <div>Loading...</div>
           ) : (
             oem.map((el, index) => (

@@ -227,6 +227,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
+import { useNavigate } from 'react-router-dom';
+
 export default function Authentication() {
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState({
@@ -240,26 +242,57 @@ export default function Authentication() {
   };
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
     
 
-    if (isSignup) {
-        await axios.post("https://lemon-earthworm-tie.cyclic.cloud/register", formData)
-        .then(response=>console.log(response))
-         .catch(err => console.log(err)) 
+  //   if (isSignup) {
+  //       await axios.post("http://localhost:8080/register", formData)
+  //       .then(response=>console.log(response))
+  //        .catch(err => console.log(err)) 
          
         
 
-    } else {
-        await axios.post("https://lemon-earthworm-tie.cyclic.cloud/login", formData)
-        .then(response=>console.log(response))
-         .catch(err => console.log(err)) 
-    }
+  //   } else {
+  //       await axios.post("http://localhost:8080/login", formData)
+  //       .then(response=>console.log(response))
+  //        .catch(err => console.log(err)) 
+  //   }
 
+  //   // Reset form fields after submission
+  //   setFormData({ name: '', email: '', password: '' });
+  // };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (isSignup) {
+      
+      await axios.post("https://lemon-earthworm-tie.cyclic.cloud/register", formData)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+    } else {
+      await axios.post("https://lemon-earthworm-tie.cyclic.cloud/login", formData)
+        .then(response => {
+          console.log(response);
+          // Redirect to the "oem" page on successful login
+          navigate('/oem');
+        })
+        .catch(err => console.log(err))
+    }
+  
     // Reset form fields after submission
     setFormData({ name: '', email: '', password: '' });
   };
+ 
+  
+  
+  
+  
+  
+  
 
   return (
     <Flex

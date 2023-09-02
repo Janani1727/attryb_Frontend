@@ -1,6 +1,5 @@
-
-
 import React, { useEffect, useState } from "react";
+
 import {
   Button,
   Modal,
@@ -13,8 +12,8 @@ import {
   useDisclosure,
   Input,
 } from "@chakra-ui/react";
-import axios from "axios";
 
+import axios from "axios";
 
 const MarketPlace = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -93,7 +92,10 @@ const MarketPlace = () => {
     };
 
     axios
-      .patch(`https://lemon-earthworm-tie.cyclic.cloud/MarketplaceInventory/update/${editItemId}`, updatedData)
+      .patch(
+        `https://lemon-earthworm-tie.cyclic.cloud/MarketplaceInventory/update/${editItemId}`,
+        updatedData
+      )
       .then((response) => {
         console.log("Data updated successfully:", response.data);
         // Refresh data from the server
@@ -106,20 +108,21 @@ const MarketPlace = () => {
       });
   };
 
-  const handleDelete=(id)=>{
+  const handleDelete = (id) => {
     axios
-    .patch(`https://lemon-earthworm-tie.cyclic.cloud/MarketplaceInventory/update/${id}`)
-    .then((response) => {
-      console.log("Data deleted successfully");
-      // Refresh data from the server
-      fetchData();
-     
-    })
-    .catch((error) => {
-      console.error("Error deleted data:", error);
-      // Handle errors here
-    });
-  }
+      .patch(
+        `https://lemon-earthworm-tie.cyclic.cloud/MarketplaceInventory/update/${id}`
+      )
+      .then((response) => {
+        console.log("Data deleted successfully");
+        // Refresh data from the server
+        fetchData();
+      })
+      .catch((error) => {
+        console.error("Error deleted data:", error);
+        // Handle errors here
+      });
+  };
 
   return (
     <>
@@ -144,45 +147,136 @@ const MarketPlace = () => {
             >
               <img src={el.image} alt="" />
             </div>
+
             <div
               style={{
                 border: "1px solid black",
                 width: "30%",
                 height: "300px",
+                textAlign: "left",
+                padding: "20px",
               }}
             >
-              <p>title:{el.title}</p>
-              <p>kms on odometer {el.kmsOnOdometer}</p>
-              <p>majorScratches : {el.majorScratches}</p>
-              <p>originalPaint : {el.originalPaint}</p>
-              <p>previousBuyers : {el.accidentsReported}</p>
-              <p>registrationPlace :{el.registrationPlace} </p>
-              <p>currentPrice :{el.currentPrice} </p>
+              <p>Title:{el.title}</p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                kms on odometer: {el.kmsOnOdometer}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                MajorScratches : {el.majorScratches}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                OriginalPaint : {el.originalPaint}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                PreviousBuyers : {el.accidentsReported}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                RegistrationPlace :{el.registrationPlace}{" "}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                CurrentPrice :{el.currentPrice}{" "}
+              </p>
               <Button
+                style={{
+                  marginTop: "10px",
+                  backgroundColor: "rgb(73, 73, 242)",
+                  color: "white",
+                }}
                 onClick={() => {
                   handleEdit(el._id);
                   onOpen();
                 }}
               >
-                edit
+                Edit
               </Button>
 
-              <Button marginLeft={"20px"} onClick={()=>handleDelete(el._id)}>delete</Button>
+              <Button
+                style={{
+                  marginTop: "10px",
+                  backgroundColor: "rgb(234, 35, 35)",
+                  color: "white",
+                }}
+                marginLeft={"20px"}
+                onClick={() => handleDelete(el._id)}
+              >
+                Delete
+              </Button>
             </div>
             <div
               style={{
                 border: "1px solid black",
                 width: "30%",
                 height: "300px",
+                textAlign: "left",
+                padding: "20px",
               }}
             >
-              <p>description</p>
-              <p>mileage {el.oemSpecs.mileage}</p>
-              <p>power {el.oemSpecs.power}</p>
-              <p>max speed {el.oemSpecs.maxSpeed}</p>
-              <p>list price {el.oemSpecs.listPrice} </p>
-              <p></p>
-              <p></p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                Description
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                Mileage: {el.oemSpecs.mileage}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                Power: {el.oemSpecs.power}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                Power :{el.oemSpecs.power}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                Max speed :{el.oemSpecs.maxSpeed}
+              </p>
+              <p
+                style={{
+                  marginTop: "8px",
+                }}
+              >
+                List price: {el.oemSpecs.listPrice}{" "}
+              </p>
             </div>
           </div>
           {/* <Button onClick={() => handleEdit(el._id)}>Edit</Button> */}
@@ -294,14 +388,13 @@ const MarketPlace = () => {
               colorScheme="blue"
               mr={3}
               // onClick={() => {
-                // Add your update logic here
-                // console.log("Updating data:", formData);
-                onClick={handleUpdate}
+              // Add your update logic here
+              // console.log("Updating data:", formData);
+              onClick={handleUpdate}
               // }}
             >
               Update Data
             </Button>
-           
           </ModalFooter>
         </ModalContent>
       </Modal>
